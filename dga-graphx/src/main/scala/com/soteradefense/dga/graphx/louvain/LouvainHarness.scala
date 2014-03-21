@@ -37,7 +37,7 @@ import org.apache.spark.Logging
 class  LouvainHarness(minProgress:Int,progressCounter:Int) {
 
   
-  def run[VD: ClassTag](sc:SparkContext,graph:Graph[VD,Long]) = {
+  def run[VD: ClassTag](sc:SparkContext,graph:Graph[VD,Double]) = {
     
     var louvainGraph = LouvainCore.createLouvainGraph(graph)
     
@@ -76,7 +76,7 @@ class  LouvainHarness(minProgress:Int,progressCounter:Int) {
    * 
    * override to specify save behavior
    */
-  def saveLevel(sc:SparkContext,level:Int,q:Double,graph:Graph[VertexState,Long]) = {
+  def saveLevel(sc:SparkContext,level:Int,q:Double,graph:Graph[VertexState,Double]) = {
     
   }
   
@@ -85,7 +85,7 @@ class  LouvainHarness(minProgress:Int,progressCounter:Int) {
    * 
    * override to specify save behavior
    */
-  def finalSave(sc:SparkContext,level:Int,q:Double,graph:Graph[VertexState,Long]) = {
+  def finalSave(sc:SparkContext,level:Int,q:Double,graph:Graph[VertexState,Double]) = {
     
   }
   

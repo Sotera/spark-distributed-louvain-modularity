@@ -14,7 +14,7 @@ class HDFSLouvainRunner(minProgress:Int,progressCounter:Int,outputdir:String) ex
 
   var qValues = Array[(Int,Double)]()
       
-  override def saveLevel(sc:SparkContext,level:Int,q:Double,graph:Graph[VertexState,Long]) = {
+  override def saveLevel(sc:SparkContext,level:Int,q:Double,graph:Graph[VertexState,Double]) = {
 	  graph.vertices.saveAsTextFile(outputdir+"/level_"+level+"_vertices")
       graph.edges.saveAsTextFile(outputdir+"/level_"+level+"_edges")
       //graph.vertices.map( {case (id,v) => ""+id+","+v.internalWeight+","+v.community }).saveAsTextFile(outputdir+"/level_"+level+"_vertices")
