@@ -23,7 +23,8 @@ class HDFSLouvainRunner(minProgress:Int,progressCounter:Int,outputdir:String) ex
       println(s"qValue: $q")
         
       // overwrite the q values at each level
-      sc.parallelize(qValues, 1).saveAsTextFile(outputdir+"/qvalues")
+      // harder to overwrite in Spark 1.2 so let's write out for each level
+      sc.parallelize(qValues, 1).saveAsTextFile(outputdir+"/level_"+level+"_qvalues")
   }
   
 }
