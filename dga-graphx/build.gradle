@@ -5,22 +5,22 @@ apply plugin: 'scala'
 version = '0.1'
 
 
-
 repositories {
     mavenLocal()
     mavenCentral()
     maven {
-    
-url "https://repository.cloudera.com/artifactory/cloudera-repos"
+        url "http://mvnrepository.com"
     }
-   
+    maven {
+        url "https://repository.cloudera.com/artifactory/cloudera-repos"
+    }
 }
  
 dependencies {
-    compile 'org.scala-lang:scala-library:2.10.3'
-    compile group: 'org.apache.spark', name: 'spark-core_2.10', version: '0.9.0-cdh5.0.0-beta-2'
-    compile group: 'org.apache.spark', name: 'spark-graphx_2.10', version: '0.9.0-cdh5.0.0-beta-2'
-    compile group: 'com.github.scopt', name: 'scopt_2.10', version: '3.2.0'
+    compile 'org.scala-lang:scala-library:2.10.4'
+    compile group: 'org.apache.spark', name: 'spark-core_2.10', version: '1.2.0-cdh5.3.3'
+    compile group: 'org.apache.spark', name: 'spark-graphx_2.10', version: '1.2.0-cdh5.3.3'
+    compile group: 'com.github.scopt', name: 'scopt_2.10', version: '3.3.0'
     compile(
       [group: 'org.slf4j', name: 'slf4j-api', version: '1.6.6'],
       [group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.6.6']
