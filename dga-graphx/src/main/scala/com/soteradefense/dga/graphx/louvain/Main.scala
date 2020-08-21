@@ -95,7 +95,7 @@ object Main {
 	      val tokens = row.split(edgedelimiter).map(_.trim())
 	      tokens.length match {
 	        case 2 => {new Edge(inputHashFunc(tokens(0)),inputHashFunc(tokens(1)),1L) }
-	        case 3 => {new Edge(inputHashFunc(tokens(0)),inputHashFunc(tokens(1)),tokens(2).toLong)}
+	        case 3 => {new Edge(inputHashFunc(tokens(0)),inputHashFunc(tokens(1)),tokens(2).toDouble)}
 	        case _ => {throw new IllegalArgumentException("invalid input line: "+row)}
 	      }
 	   })	   
