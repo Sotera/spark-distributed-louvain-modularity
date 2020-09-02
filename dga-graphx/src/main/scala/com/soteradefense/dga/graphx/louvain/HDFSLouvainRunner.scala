@@ -38,13 +38,12 @@ class HDFSLouvainRunner(minProgress: Int, progressCounter: Int, outputdir: Strin
     println(s"On level=$level")
 
     // Read the data as an RDD[(Long, Long)]
-    var clusterOutputRDD: RDD[(Long, Long)] = sc.textFile(outputdir + "/level_" + level + "_cluster")
+    val clusterOutputRDD: RDD[(Long, Long)] = sc.textFile(outputdir + "/level_" + level + "_cluster")
       .map(line => line.split(","))
       .map { case Array(x, y) => (x.toLong, y.toLong) }
     val clusterOutputList: List[(Long, Long)] = clusterOutputRDD.collect().toList
 
-    var out = null
-
+    println("Total vertices" + clusterOutputList.length)
     for (out <- clusterOutputList) {
       val id: Long = out._1
       val clusterId: Long = out._2
@@ -52,7 +51,6 @@ class HDFSLouvainRunner(minProgress: Int, progressCounter: Int, outputdir: Strin
     }
 
     // iterate on all levels and combine output
-    var l: Int = -1
     for (l <- (level - 1) to 0 by -1) {
       println(s"On level=$l")
 
@@ -61,11 +59,11 @@ class HDFSLouvainRunner(minProgress: Int, progressCounter: Int, outputdir: Strin
       parentClusterMap ++= clusterMap
       clusterMap.clear()
 
-      var clusterOutputRDD: RDD[(Long, Long)] = sc.textFile(outputdir + "/level_" + level + "_cluster")
+      val clusterOutputRDD: RDD[(Long, Long)] = sc.textFile(outputdir + "/level_" + l + "_cluster")
         .map(line => line.split(","))
         .map { case Array(x, y) => (x.toLong, y.toLong) }
       val clusterOutputList: List[(Long, Long)] = clusterOutputRDD.collect().toList
-
+      println("Total vertices" + clusterOutputList.length)
       for (out <- clusterOutputList) {
         val id: Long = out._1
         val clusterId: Long = parentClusterMap(out._2)
